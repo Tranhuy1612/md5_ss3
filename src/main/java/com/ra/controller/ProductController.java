@@ -52,12 +52,12 @@ public class ProductController {
         return "redirect:/product";
     }
     @GetMapping("/edit-product/{id}")
-    public String edit(@PathVariable("id")int id ,Model model){
-        Category categories = categoryService.findById(id);
-        model.addAttribute("categories",categories);
-        Product product = productService.findById(id);
-        model.addAttribute("product",product);
-        return "product/edit-product";
+    public String edit(@PathVariable("id") Integer id , Model model) {
+        Product product = productService.findById(id) ;
+        List<Category> list = categoryService.findAll();
+        model.addAttribute("list", list) ;
+        model.addAttribute("product", product) ;
+        return "product/edit-product" ;
     }
     @PostMapping("/update-product")
     public String update(@ModelAttribute("product") Product product){
